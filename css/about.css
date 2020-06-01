@@ -1,0 +1,143 @@
+html,
+body,
+div,
+span,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+kbd,
+small,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+label,
+legend,
+table,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+::selection {
+  background: #b3e5fc;
+}
+html,
+body{
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background 0.3s ease-out;
+  background: #222;
+  overflow: hidden;
+}
+body.p1.p2{
+  background: 
+}
+
+body{
+  background: url("https://cdn.jsdelivr.net/gh/edfus/storage/images/about/aya-by-Kinoe.png") left bottom no-repeat,repeating-linear-gradient(60deg,#adf 0px,#adf 20px,transparent 20px,transparent 40px),#fff; 
+}
+/*-------------------------
+	General Styles
+--------------------------*/
+#UD1{
+  background: none !important;font-size: 200px;transform: rotate(15deg);background: 0 0;white-space: nowrap;text-align: right;color: #adf;height: 0;
+}
+#UD2{
+  position: fixed;left: calc(50% - 100px);top:calc(50% - 10px);width: 200px;text-align: center;text-shadow:1px 1px #000;color:#fff;user-select: text;
+}
+#portal{
+  position: fixed;right: 20%;bottom: 300px;width: 400px;text-align: center;cursor: pointer;transform: rotate(60deg);-webkit-mask-box-image: url(https://cdn.jsdelivr.net/gh/edfus/storage/images/about/aya-by-Kinoe.png);
+}
+#nav-header{
+    position: relative;
+    clip-path: polygon(0 0,0 52%,100% 100%,100% 0%);
+    background: #adf;
+    height: 400px;
+    width: 100%;
+    min-width: 800px;
+}
+#nav-header>*{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: linear-gradient(red 90%,transparent 100%);
+}
+#home{
+    background: linear-gradient(blue 90%,transparent 100%);
+}#tech{
+    background: linear-gradient(yellow 90%,transparent 100%);
+}#more{
+    background: linear-gradient(black 90%,transparent 100%);
+}#source{
+    background: linear-gradient(pink 90%,transparent 100%);;
+}
+#edfus{
+    background: linear-gradient(#adf 90%,transparent 100%);
+}
+#nav-header > a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);  
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 2px;
+    /*background: url("https://cdn.jsdelivr.net/gh/edfus/storage/images/about/aya-by-Kinoe.jpg") no-repeat;*/
+    /*background-size: contain;*/
+}
+#nav-header > a:hover{
+    mask: #0000007f;
+}
+#home{
+    clip-path: polygon(0 0,0 52%,10% 86.5%,20% 0%);
+}
+#tech{
+    clip-path: polygon(20.5% 0,15.5% 43.25%,35.3% 43.25%,70.3% 0);
+}
+#more{
+    clip-path: polygon(71% 0,35.8% 43.75%,45% 52%,100% 45%,100% 0);
+}
+#source{
+    clip-path: polygon(45.2% 53%,45.4% 68%,60% 82%,100% 100%,100% 46%);
+}
+#about{
+    clip-path: polygon(10.8% 86%,15.3% 44.15%,35.5% 44.25%,44.8% 52.6%,45% 68%,42% 75%)
+}
+#edfus{
+    clip-path: polygon(45.2% 68.6%,60% 82%,42% 75%);
+}
