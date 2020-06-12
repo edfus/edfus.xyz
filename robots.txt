@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /about/
+Disallow: /*.gif$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.jfif$
