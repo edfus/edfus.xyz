@@ -7,4 +7,7 @@ Disallow: /*.jpeg$
 Disallow: /*.jfif$
 Disallow: /*.webp$
 Disallow: /*.svg$
+Disallow: /*.mp3$
+Disallow: /*.ogg$
+Disallow: /*.m4a$
 Disallow: /README.md
