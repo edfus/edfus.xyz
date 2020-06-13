@@ -5,3 +5,6 @@ Disallow: /*.png$
 Disallow: /*.jpg$
 Disallow: /*.jpeg$
 Disallow: /*.jfif$
+Disallow: /*.webp$
+Disallow: /*.svg$
+Disallow: /README.md
