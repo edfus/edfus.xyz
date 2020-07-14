@@ -1,1 +1,20 @@
-"use strict";"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/serviceWorker.js",{scope:"/"}).then(function(e){e.installing?console.log("Service worker installing"):e.waiting?console.log("Service worker installed"):e.active&&console.log("Service worker active")}).catch(function(e){console.log("Registration failed with "+e)})});
+// register service worker
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register('/serviceWorker.js', { scope: '/' }).then(function(reg) {
+  
+            if(reg.installing) {
+              console.log('Service worker installing');
+            } else if(reg.waiting) {
+              console.log('Service worker installed');
+            } else if(reg.active) {
+              console.log('Service worker active');
+            }
+        
+          }).catch(function(error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+          });
+    });
+  }

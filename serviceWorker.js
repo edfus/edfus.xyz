@@ -61,3 +61,8 @@ self.addEventListener('fetch', function(e) {
     })
   )
 })
+/*TypeError in plugin "gulp-babel"
+Message:
+Z:\git_depository\hexo_blog_2019\public\serviceWorker.js: Cannot read property 'bindings' of null
+*/
+//npm install -D babel-loader @babel/core @babel/preset-env
