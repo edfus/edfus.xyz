@@ -1,1 +1,42 @@
-"use strict";!function(){window.goToTop=function(){var o=document.querySelector("a.gotop"),t=null;window.addEventListener("scroll",function(){null===t&&(t=setTimeout(function(){300<window.scrollY?o.classList.add("show"):o.classList.remove("show"),t=null},200))},!1)},"loading"!==document.readyState?setTimeout(function(){return window.goToTop()},1):document.addEventListener("DOMContentLoaded",function(){return window.goToTop()});var i=document.querySelector("footer#footer");!function(o){function t(o){document.documentElement.scrollHeight-4<=document.documentElement.clientHeight?o.style.cssText="position:absolute;left:0;bottom:0":o.style.cssText=""}var n=0<arguments.length&&void 0!==o?o:i;t(n);var e="onorientationchange"in window?"orientationchange":"resize";window.addEventListener(e,function(){return t(n)},!1)}()}();
+(()=>{
+    window.goToTop = function() {
+        const topElement = document.querySelector('a.gotop');
+        const min = 300;
+        var timer = null;   
+        window.addEventListener("scroll",()=>{
+            if (timer === null) {               
+                timer = setTimeout(()=>{
+                let scrollTop = window.scrollY;
+                if (scrollTop > min) {
+                    topElement.classList.add('show');
+                } else {
+                    topElement.classList.remove('show');
+                }
+                timer = null;
+                }, 200);
+            }
+        },false);
+    };
+    if (document.readyState !== "loading") {
+        setTimeout(()=>window.goToTop(), 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", ()=>window.goToTop());
+    }
+    //footer fixed to bottom
+    const footer = document.querySelector("footer#footer");
+    ((e = footer) => {
+        
+        const fixFooter = (e) => {
+        if(document.documentElement.scrollHeight - 4 <= document.documentElement.clientHeight){
+            e.style.cssText = "position:absolute;left:0;bottom:0";
+        }else{
+            e.style.cssText = "";
+        }
+        }
+        fixFooter(e);
+        //orientationchange is deprecated. But I have no idea what else should I use.
+        const orientationEvent = "onorientationchange" in window ? "orientationchange" : "resize";
+        window.addEventListener(orientationEvent, () => fixFooter(e), false);
+    })()
+
+})()
