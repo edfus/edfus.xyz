@@ -1,13 +1,12 @@
-const version = "0.0.2--dev";
-const cacheName = "cache23-" + version;
+const version = "0.0.4--beta";
+const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
   "/index.html",
   "/css/style.css",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/ddby_logo.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
-  "https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"
+  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp"
 ]
 //Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
 //TypeError: Request failed service worker happens ↓
@@ -26,7 +25,7 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (key !== cacheName) {
+        if (key !== cacheName||location.host.indexOf("localhost")!==-1) {
           console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
@@ -49,7 +48,7 @@ self.addEventListener('fetch', function(e) {
           if (!response || response.status !== 200 || response.type !== "basic") {
               return response;
           }
-          if( request.method === "GET" ){
+          if( request.method === "GET" && location.host.indexOf("localhost") === -1){
             const cache = await caches.open(cacheName)
             await cache.put(request.url, response.clone());
           } 
