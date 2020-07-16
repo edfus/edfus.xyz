@@ -1,1 +1,70 @@
-<!DOCTYPE html><html style="height:100%"><head><title>贪吃蛇</title><meta name="generator" content="Hexo 4.2.0"></head><body style="background:#222;height:100%;overflow:hidden"><div style="margin:20px auto;color:#fff;width:150px;text-align:center">请选择速度</div><div id="box1" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(20% - 128px);cursor:pointer" onclick='location.href="/snake-100"'></div><script>var arr1=[15],next1=10;document.onkeydown=function(r){next1={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run1=setInterval(function(){var list=["-1&&arr1[0]%10==0","1&&arr1[0]%10==9","-10&&arr1[0]<10","10&&arr1[0]>189"],temp=arr1[0]+next1;if(list.some(function(x){return eval("next1=="+x)})||0<=arr1.indexOf(temp))return arr1=[15],next1=10,clearInterval(run1);arr1.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr1.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr1.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr1.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box1").innerHTML=s},100)</script><div id="box2" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(50% - 128px);cursor:pointer" onclick='location.href="/snake-200"'></div><script>var arr2=[15],next2=10;document.onkeydown=function(r){next2={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run2=setInterval(function(){var list=["-1&&arr2[0]%10==0","1&&arr2[0]%10==9","-10&&arr2[0]<10","10&&arr2[0]>189"],temp=arr2[0]+next2;if(list.some(function(x){return eval("next2=="+x)})||0<=arr2.indexOf(temp))return arr2=[15],next2=10,clearInterval(run2);arr2.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr2.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr2.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr2.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box2").innerHTML=s},200)</script><div id="box3" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(80% - 128px);cursor:pointer" onclick='location.href="/snake-400"'></div><script>var arr3=[15],next3=10;document.onkeydown=function(r){next3={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run3=setInterval(function(){var list=["-1&&arr3[0]%10==0","1&&arr3[0]%10==9","-10&&arr3[0]<10","10&&arr3[0]>189"],temp=arr3[0]+next3;if(list.some(function(x){return eval("next3=="+x)})||0<=arr3.indexOf(temp))return arr3=[15],next3=10,clearInterval(run3);arr3.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr3.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr3.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr3.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box3").innerHTML=s},400)</script></body></html>
+ 
+<!DOCTYPE html><html style="height: 100%;"><head><title>贪吃蛇</title><meta name="generator" content="Hexo 4.2.0"></head><body style="background: #222;height: 100%;overflow: hidden;">
+	<div style="margin: 20px auto; color: #fff;width: 150px;text-align: center;">请选择速度</div>
+<div id="box1" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position: absolute;top:calc(50% - 250px);left:calc(20% - 128px);cursor: pointer;" onclick="location.href = '/snake-100'"></div><script>
+var arr1=[15];
+var next1=10;//最好判断一下arr1[1]!=arr1[0]+x
+document.onkeydown=function(e){next1={'37':-1,'39':1,'38':-10,'40':10}[(e?e:event).keyCode]};
+var run1=setInterval(function(){
+    var list=['-1&&arr1[0]%10==0','1&&arr1[0]%10==9','-10&&arr1[0]<10','10&&arr1[0]>189'];
+    var temp=arr1[0]+next1;
+    if(list.some(function(x){return eval('next1=='+x)})||arr1.indexOf(temp)>=0)
+        return arr1=[15],(next1=10),clearInterval(run1);
+    arr1.unshift(temp);
+    if(this.food==null||food==temp){
+        (function(n){n>=0?arguments.callee((list[n]=n)-1):null})(199);
+        list=list.filter(function(x){return arr1.indexOf(x)<0});
+        food=list[Math.round(Math.random()*(list.length-1))];//food是全局变量
+    }
+    else
+        arr1.pop();
+    var s='';
+    for(var j=0;j<200;j++)
+        s+=(j%10==0&&j!=0?'<br/>':'')+(arr1.indexOf(j)>=0?'\u25a0':(j==food?'\u2605':'&emsp;'));
+    document.getElementById("box1").innerHTML=s;
+},100);
+</script><div id="box2" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position: absolute;top:calc(50% - 250px);left:calc(50% - 128px);cursor: pointer;" onclick="location.href = '/snake-200'"></div><script>
+var arr2=[15];
+var next2=10;//最好判断一下arr2[1]!=arr2[0]+x
+document.onkeydown=function(e){next2={'37':-1,'39':1,'38':-10,'40':10}[(e?e:event).keyCode]};
+var run2=setInterval(function(){
+    var list=['-1&&arr2[0]%10==0','1&&arr2[0]%10==9','-10&&arr2[0]<10','10&&arr2[0]>189'];
+    var temp=arr2[0]+next2;
+    if(list.some(function(x){return eval('next2=='+x)})||arr2.indexOf(temp)>=0)
+        return arr2=[15],(next2=10),clearInterval(run2);
+    arr2.unshift(temp);
+    if(this.food==null||food==temp){
+        (function(n){n>=0?arguments.callee((list[n]=n)-1):null})(199);
+        list=list.filter(function(x){return arr2.indexOf(x)<0});
+        food=list[Math.round(Math.random()*(list.length-1))];//food是全局变量
+    }
+    else
+        arr2.pop();
+    var s='';
+    for(var j=0;j<200;j++)
+        s+=(j%10==0&&j!=0?'<br/>':'')+(arr2.indexOf(j)>=0?'\u25a0':(j==food?'\u2605':'&emsp;'));
+    document.getElementById("box2").innerHTML=s;
+},200);
+</script><div id="box3" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position: absolute;top:calc(50% - 250px);left:calc(80% - 128px);cursor: pointer;" onclick="location.href = '/snake-400'"></div><script>
+var arr3=[15];
+var next3=10;//最好判断一下arr3[1]!=arr3[0]+x
+document.onkeydown=function(e){next3={'37':-1,'39':1,'38':-10,'40':10}[(e?e:event).keyCode]};
+var run3=setInterval(function(){
+    var list=['-1&&arr3[0]%10==0','1&&arr3[0]%10==9','-10&&arr3[0]<10','10&&arr3[0]>189'];
+    var temp=arr3[0]+next3;
+    if(list.some(function(x){return eval('next3=='+x)})||arr3.indexOf(temp)>=0)
+        return arr3=[15],(next3=10),clearInterval(run3);
+    arr3.unshift(temp);
+    if(this.food==null||food==temp){
+        (function(n){n>=0?arguments.callee((list[n]=n)-1):null})(199);
+        list=list.filter(function(x){return arr3.indexOf(x)<0});
+        food=list[Math.round(Math.random()*(list.length-1))];//food是全局变量
+    }
+    else
+        arr3.pop();
+    var s='';
+    for(var j=0;j<200;j++)
+        s+=(j%10==0&&j!=0?'<br/>':'')+(arr3.indexOf(j)>=0?'\u25a0':(j==food?'\u2605':'&emsp;'));
+    document.getElementById("box3").innerHTML=s;
+},400);
+</script></body></html>
