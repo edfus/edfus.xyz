@@ -1,4 +1,4 @@
-const version = "0.0.5--beta";
+const version = "0.0.6--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
@@ -7,6 +7,7 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/ddby_logo.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
+  "https://cdn.jsdelivr.net/gh/edfus/storage/images/mobile-SA/74309455_p4_crop.jpg.webp",
   "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js",
   "/js_temp/script.js"
 ] 
