@@ -1,4 +1,4 @@
-const version = "0.0.6--beta";
+const version = "0.0.7--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
