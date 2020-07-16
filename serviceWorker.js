@@ -1,4 +1,4 @@
-const version = "0.0.4--beta";
+const version = "0.0.5--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
@@ -6,10 +6,13 @@ const cacheResources = [
   "/css/style.css",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/ddby_logo.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp"
-]
-//Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
-//TypeError: Request failed service worker happens ↓
+  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
+  "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js",
+  "/js_temp/script.js"
+] 
+//NOTE: it seems that cacheResources is used only after first install.
+//NOTE: Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
+//NOTE: TypeError: Request failed service worker happens ↓
 //when your resourcesToCache includes something that returns a 404 response.
 self.addEventListener('install', (event) =>{
     event.waitUntil(
@@ -25,7 +28,7 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (key !== cacheName||location.host.indexOf("localhost")!==-1) {
+        if (key !== cacheName) {
           console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
@@ -48,19 +51,19 @@ self.addEventListener('fetch', function(e) {
           if (!response || response.status !== 200 || response.type !== "basic") {
               return response;
           }
-          if( request.method === "GET" && location.host.indexOf("localhost") === -1){
+          if( request.method === "GET" && !location.host.includes("localhost")){
             const cache = await caches.open(cacheName)
             await cache.put(request.url, response.clone());
           } 
-          // https://www.rrfed.com/sw4.min.js
-          // https://stackoverflow.com/questions/54619653/can-a-service-worker-fetch-and-cache-cross-origin-assets
+          //NOTE: https://www.rrfed.com/sw4.min.js
+          //NOTE: https://stackoverflow.com/questions/54619653/can-a-service-worker-fetch-and-cache-cross-origin-assets
           return response;
       })
       }
     })
   )
 })
-/*TypeError in plugin "gulp-babel"
+/*NOTE: TypeError in plugin "gulp-babel"
 Message:
 Z:\git_depository\hexo_blog_2019\public\serviceWorker.js: Cannot read property 'bindings' of null
 */
