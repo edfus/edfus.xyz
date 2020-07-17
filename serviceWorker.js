@@ -11,6 +11,7 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js",
   "/js_temp/script.js"
 ] 
+//FIX: babel binding error code
 //NOTE: it seems that cacheResources is used only after first install.
 //NOTE: Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
 //NOTE: TypeError: Request failed service worker happens ↓
