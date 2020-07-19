@@ -30,7 +30,7 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (key !== cacheName || location.host.includes("localhost")) {
+        if (key !== cacheName || location.hostname === "localhost") {
           console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
@@ -53,7 +53,7 @@ self.addEventListener('fetch', function(e) {
           if (!response || response.status !== 200 || response.type !== "basic") {
               return response;
           }
-          if( request.method === "GET" && !location.host.includes("localhost")){
+          if( request.method === "GET" && !location.hostname === "localhost"){
             const cache = await caches.open(cacheName)
             await cache.put(request.url, response.clone());
           } 
