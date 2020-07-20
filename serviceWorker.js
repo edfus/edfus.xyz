@@ -1,4 +1,4 @@
-const version = "1.1.3--beta";
+const version = "1.1.5--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
@@ -8,8 +8,7 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/mobile-SA/74309455_p4_crop.jpg.webp",
-  "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js",
-  "/js_temp/script.js",
+  "https://cdn.jsdelivr.net/gh/edfus/storage/js/script.js",
   "https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox_modified.min.js"
 ] 
 //FIX: babel binding error code
