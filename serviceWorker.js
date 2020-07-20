@@ -1,4 +1,4 @@
-const version = "0.1.1--beta";
+const version = "1.1.2--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
@@ -9,7 +9,8 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/mobile-SA/74309455_p4_crop.jpg.webp",
   "https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js",
-  "/js_temp/script.js"
+  "/js_temp/script.js",
+  "https://cdn.jsdelivr.net/gh/edfus/storage/fancybox/fancybox-modified.min.js"
 ] 
 //FIX: babel binding error code
 //NOTE: it seems that cacheResources is used only after first install.
