@@ -1,4 +1,4 @@
-const version = "1.1.9--beta";
+const version = "1.1.8--beta";
 const cacheName = "cache-" + version;
 const cacheResources = [
   '/',
@@ -8,8 +8,8 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
   "https://cdn.jsdelivr.net/gh/edfus/storage/images/mobile-SA/74309455_p4_crop.jpg.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/js/script@1.js",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox.min.js"
+  "https://cdn.jsdelivr.net/gh/edfus/storage/js/script@1.1.js",
+  "https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox@1.0.min.js"
 ] 
 //FIX: babel binding error code
 //NOTE: it seems that cacheResources is used only after first install.
