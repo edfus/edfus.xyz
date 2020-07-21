@@ -11,7 +11,6 @@ const cacheResources = [
   "https://cdn.jsdelivr.net/gh/edfus/storage/js/script@1.1.js",
   "https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox@1.0.min.js"
 ] 
-//FIX: babel binding error code
 //NOTE: it seems that cacheResources is used only after first install.
 //NOTE: Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
 //NOTE: TypeError: Request failed service worker happens ↓
@@ -69,4 +68,10 @@ self.addEventListener('fetch', function(e) {
 Message:
 Z:\git_depository\hexo_blog_2019\public\serviceWorker.js: Cannot read property 'bindings' of null
 */
-//npm install -D babel-loader @babel/core @babel/preset-env
+//npm install -D babel-loader @babel/core @babel/preset-env -- no use.
+/*
+"@babel/core": "^7.0.0",
+"@babel/preset-env": "^7.0.0",
+"gulp": "^4.0.2",
+"gulp-babel": "^8.0.0",
+*/
