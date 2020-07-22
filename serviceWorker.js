@@ -1,61 +1,106 @@
-const version = "1.1.8--beta";
+import {fontsCacheName, fonts, CDNname} from './pwa'
+{
+const version = "2.1.9--beta";
 const cacheName = "cache-" + version;
+const scriptVersion = "@1.1";
+
 const cacheResources = [
-  '/',
-  "/index.html",
-  "/css/style.css",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/ddby_logo.png.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/footer-reimu.png.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/root/font-display.png.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/images/mobile-SA/74309455_p4_crop.jpg.webp",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/js/script@1.1.js",
-  "https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox@1.0.min.js"
-] 
-//NOTE: it seems that cacheResources is used only after first install.
-//NOTE: Access to fetch at 'https://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js' has been blocked by CORS policy
-//NOTE: TypeError: Request failed service worker happens ↓
-//when your resourcesToCache includes something that returns a 404 response.
-self.addEventListener('install', (event) =>{
-    event.waitUntil(
-      caches.open(cacheName).then((cache) =>{
-        return cache.addAll(cacheResources)
-            .then(() => self.skipWaiting());
+  `/css/style.css`,
+  `/css/style-more.css`,
+  `${CDNname}/js/script${scriptVersion}.js`,
+  `${CDNname}/js/script-category${scriptVersion}.js`,
+  `${CDNname}/js/script-more${scriptVersion}.js`,
+  `${CDNname}/glightbox/glightbox@1.0.min.js`
+];
+const DLC = [
+  `https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js`,
+  `${CDNname}/gitalk/gitalk.css`
+];
+/*Check resources in case Exception TypeError	throws*/
+
+const downloadFontFunc = (font) => {
+  caches.open(fontsCacheName).then(cache =>{
+    if('connection' in navigator && !navigator.connection.saveData){
+      cache.add(font.url).then(()=>{
+        self.clients.matchAll().then(all => all.forEach(client => {
+          client.postMessage(font);
+        }));
       })
-    );
+    } else {
+      console.info("metered network?");
+    }
+  })
+}
+
+self.addEventListener('install', (event) =>{
+  self.skipWaiting();
+  //Take place of the active service worker.
+  event.waitUntil(
+    //waitUntil() tells the browser that work is ongoing until the promise settles, 
+    //and it shouldn't terminate the service worker if it wants that work to complete.
+    caches.open(cacheName).then(cache =>{
+      return cache.addAll(cacheResources)
+      //addAll() will overwrite any key/value pairs previously stored in the cache that match the request
+          .then(() => {
+            if('connection' in navigator && !navigator.connection.saveData){
+              cache.addAll(DLC).catch(e=>console.log(e));
+            }
+          });
+    }).then(()=>{
+      fonts.forEach(font=>{
+        downloadFontFunc(font);
+      })
+    })
+  )
+})
+
+self.addEventListener("message", function(event) {
+  downloadFontFunc(event.data);
 });
 
 self.addEventListener('activate', function (e) {
-  console.log('[ServiceWorker] Activate');
+  console.log('[ServiceWorker] Activate.');
   e.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
-        if (key !== cacheName || location.hostname === "localhost") {
-          console.log('[ServiceWorker] Removing old cache', key);
+        if (key !== cacheName && key !== fontsCacheName) {
+          console.log('[ServiceWorker] Removing old cache:', key);
           return caches.delete(key);
         }
       }));
     })
-  );
-  return self.clients.claim();
+  )
+  return self.clients.claim(); //
 });
 
 self.addEventListener('fetch', function(e) {
+  let hostname = e.request.url.split("//")[1].split('/')[0];
   e.respondWith(
     caches.match(e.request).then(async function(response) {
       if (response != null) {
         return response
       }
       else{
-        //return fetch(e.request.url)
+        if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin') {
+          console.dir(e.request);
+          return;
+        }
         let request = e.request.clone();
+        //Failed to execute 'fetch' on 'WorkerGlobalScope': 'only-if-cached' can be set only with 'same-origin' mode
+        //https://bugs.chromium.org/p/chromium/issues/detail?id=823392
+        //https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
         return await fetch(request).then(async response=>{
-          if (!response || response.status !== 200 || response.type !== "basic") {
+          
+          if (!response || response.status !== 200 || response.type !== "basic" ? ( response.type !== "cors" ? true : hostname !== "cdn.jsdelivr.net" ) : false ) {
+            console.dir(response.status);  
+            console.dir(response.type);
               return response;
           }
-          if( request.method === "GET" && !location.hostname === "localhost"){
-            const cache = await caches.open(cacheName)
+          if( request.method === "GET" ){
+            const cache = await caches.open(cacheName);
             await cache.put(request.url, response.clone());
-          } 
+          }
+          //Cloning the response is necessary because request and response streams can only be read once.
           //NOTE: https://www.rrfed.com/sw4.min.js
           //NOTE: https://stackoverflow.com/questions/54619653/can-a-service-worker-fetch-and-cache-cross-origin-assets
           return response;
@@ -75,3 +120,4 @@ Z:\git_depository\hexo_blog_2019\public\serviceWorker.js: Cannot read property '
 "gulp": "^4.0.2",
 "gulp-babel": "^8.0.0",
 */
+}
