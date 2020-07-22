@@ -1,6 +1,6 @@
 //import {fontsCacheName, fonts, CDNname} from './pwa'
 {
-const version = "2.1.9--beta";
+const version = "3.1.0--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
 const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
@@ -103,18 +103,15 @@ self.addEventListener('fetch', function(e) {
         //https://bugs.chromium.org/p/chromium/issues/detail?id=823392
         //https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
         return await fetch(request).then(async response=>{
-          
           if (!response || response.status !== 200 || response.type !== "basic" ? ( response.type !== "cors" ? true : hostname !== "cdn.jsdelivr.net" ) : false ) {
-            console.dir(response.status);  
-            console.dir(response.type);
-              return response;
+            //There is no HTTP status code 0. What you see is a 0 returned by the API/library that you are using.
+            return response;
           }
           if( request.method === "GET" ){
             const cache = await caches.open(cacheName);
             await cache.put(request.url, response.clone());
           }
           //Cloning the response is necessary because request and response streams can only be read once.
-          //NOTE: https://www.rrfed.com/sw4.min.js
           //NOTE: https://stackoverflow.com/questions/54619653/can-a-service-worker-fetch-and-cache-cross-origin-assets
           return response;
       })
