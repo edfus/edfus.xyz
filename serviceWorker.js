@@ -1,9 +1,9 @@
-import {fontsCacheName, fonts, CDNname} from './pwa'
+//import {fontsCacheName, fonts, CDNname} from './pwa'
 {
 const version = "2.1.9--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
-
+const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
 const cacheResources = [
   `/css/style.css`,
   `/css/style-more.css`,
@@ -18,6 +18,19 @@ const DLC = [
 ];
 /*Check resources in case Exception TypeError	throws*/
 
+const fontsCacheName = "fontsCache-1.0";
+const fonts = [
+  {
+    name: "筑紫A丸ゴシック",
+    url: `${CDNname}/fonts/筑紫A丸ゴシック.woff2`,
+    unicodeRange: 'U+4E00-9FCB'/*汉字字符集 4E00-9FA5 9FA6-9FCB*/
+  },
+  {
+    name: "Consolas",
+    url: `${CDNname}/fonts/Consolas.woff2`,
+    unicodeRange: 'U+0000-007F'
+  }
+];
 const downloadFontFunc = (font) => {
   caches.open(fontsCacheName).then(cache =>{
     if('connection' in navigator && !navigator.connection.saveData){

@@ -14,8 +14,8 @@ const fonts = [
     unicodeRange: 'U+0000-007F'
   }
 ];
-export {fontsCacheName, fonts, CDNname};
-      
+//export {fontsCacheName, fonts, CDNname};
+{
 if("caches" in window)
   if ('serviceWorker' in navigator) {
     caches.keys().then(e=>{
@@ -35,10 +35,11 @@ if("caches" in window)
         })
     })
     window.addEventListener("load", function() {
-      navigator.serviceWorker.register('/serviceWorker.js', { scope: '/', type: 'module' }).then(function(reg) {
+      navigator.serviceWorker.register('/serviceWorker.js', { scope: '/' }).then(function(reg) {
       //Registration failed with NotSupportedError: type 'module' in RegistrationOptions is not implemented yet.See https://crbug.com/824647 for details.  
-        if(reg.installing)
+        if(reg.installing){
           console.log('[ServiceWorker] installing');
+        }
       }).catch(function(error) {
         console.log('Registration failed with ' + error);
       });
@@ -60,4 +61,5 @@ const fontDeployFunc = (name, url) => {
     });
     console.log(name + " added");
   }
+}
 }
