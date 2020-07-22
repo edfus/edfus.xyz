@@ -1,6 +1,6 @@
 //import {fontsCacheName, fonts, CDNname} from './pwa'
 {
-const version = "3.1.0--beta";
+const version = "3.1.2--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
 const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
@@ -10,7 +10,7 @@ const cacheResources = [
   `${CDNname}/js/script${scriptVersion}.js`,
   `${CDNname}/js/script-category${scriptVersion}.js`,
   `${CDNname}/js/script-more${scriptVersion}.js`,
-  `${CDNname}/glightbox/glightbox@1.0.min.js`
+  `${CDNname}/glightbox/glightbox${scriptVersion}.min.js`
 ];
 const DLC = [
   `https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js`,
