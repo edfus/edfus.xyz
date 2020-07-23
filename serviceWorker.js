@@ -1,6 +1,6 @@
 //import {fontsCacheName, fonts, CDNname} from './pwa'
 {
-const version = "3.1.2--beta";
+const version = "3.2.1--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
 const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
