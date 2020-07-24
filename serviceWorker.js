@@ -1,13 +1,13 @@
 //import {fontsCacheName, fonts, CDNname} from './pwa'
 {
-const version = "3.2.1--beta";
+const version = "3.2.2--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
 const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
 const cacheResources = [
   `/css/style.css`,
   `/css/style-more.css`,
-  `${CDNname}/js/script${scriptVersion}.js`,
+  `${CDNname}/js/script@1.2.js`,
   `${CDNname}/js/script-category${scriptVersion}.js`,
   `${CDNname}/js/script-more${scriptVersion}.js`,
   `${CDNname}/glightbox/glightbox${scriptVersion}.min.js`
