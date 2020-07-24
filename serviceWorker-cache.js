@@ -1,6 +1,6 @@
 //import {fontsCacheName, fonts, CDNname} from './pwa'
 {
-const version = "3.2.2--beta";
+const version = "3.2.3--beta";
 const cacheName = "cache-" + version;
 const scriptVersion = "@1.1";
 const CDNname = "https://cdn.jsdelivr.net/gh/edfus/storage";
@@ -12,28 +12,25 @@ const cacheResources = [
   `${CDNname}/js/script-more${scriptVersion}.js`,
   `${CDNname}/glightbox/glightbox${scriptVersion}.min.js`
 ];
+const DLC = [
+  `https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js`,
+  `${CDNname}/gitalk/gitalk.css`
+];
 /*Check resources in case Exception TypeError	throws*/
 
-const indexedDBsuffix = "#indexedDB";
-const indexedDBResources = [
-  `https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js${indexedDBsuffix}`,
-  `${CDNname}/gitalk/gitalk.css${indexedDBsuffix}`,
-  `${CDNname}/fonts/筑紫A丸ゴシック.woff2${indexedDBsuffix}`,
-  `${CDNname}/fonts/Consolas.woff2${indexedDBsuffix}`
-]
+const fontsCacheName = "fontsCache-1.0";
 const fonts = [
   {
     name: "筑紫A丸ゴシック",
-    url: `${CDNname}/fonts/筑紫A丸ゴシック.woff2${indexedDBsuffix}`,
+    url: `${CDNname}/fonts/筑紫A丸ゴシック.woff2`,
     unicodeRange: 'U+4E00-9FCB'/*汉字字符集 4E00-9FA5 9FA6-9FCB*/
   },
   {
     name: "Consolas",
-    url: `${CDNname}/fonts/Consolas.woff2${indexedDBsuffix}`,
+    url: `${CDNname}/fonts/Consolas.woff2`,
     unicodeRange: 'U+0000-007F'
   }
 ];
-
 const downloadFontFunc = (font) => {
   caches.open(fontsCacheName).then(cache =>{
     if('connection' in navigator && !navigator.connection.saveData){
@@ -47,65 +44,6 @@ const downloadFontFunc = (font) => {
     }
   })
 }
-
-
-fetch(
-  new Request('flowers.jpg', 
-    { method: 'GET',
-      headers: new Headers(),
-      mode: 'cors',
-      referrer: 'no-referrer',
-      redirect: 'follow' 
-    })
-  ).then(response => {
-        if(response.ok)
-          return response.blob();
-        else console.dir(response)
-      })
-      //使用blob()从response中读取一个Blob对象
-      .then(myBlob => {
-        var objectURL = URL.createObjectURL(myBlob);
-        myImage.src = objectURL;
-      })
-      .catch(error => console.error(error));
-
-let request = indexedDB.open('Database', 1);
-let db = null;
-request.onerror = () => {
-  console.log('woah');
-}
-request.onsuccess = e => {
-  db = e.target.result;
-  //如果 onupgradeneeded 事件成功执行完成，打开数据库请求的 onsuccess 处理函数会被触发。
-}
-
-request.onupgradeneeded = e => {
-  var db = e.target.result;
-  let fontsStore = db.createObjectStore('fonts', {keyPath: 'url', autoIncrement: false});
-  //keyPath true autoIncrement false
-  fontsStore.createIndex('fontURLindex','url',{unique: true});
-  fontsStore.transaction.oncomplete = e=>{
-
-  }
-}
-
-function blobToArrayBuffer(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('loadend', (e) => {
-      resolve(reader.result);
-    });
-    reader.addEventListener('error', reject);
-    reader.readAsArrayBuffer(blob);
-  });
-}
-function arrayBufferToBlob(buffer, type) {
-  return new Blob([buffer], {type: type});
-}
-//https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/indexeddb-best-practices
-// Storing ArrayBuffers in IndexedDB is very well supported.
-// a Blob has a MIME type while an ArrayBuffer does not. 
-
 
 self.addEventListener('install', (event) =>{
   self.skipWaiting();
@@ -130,14 +68,8 @@ self.addEventListener('install', (event) =>{
 })
 
 self.addEventListener("message", function(event) {
-  if(event.data === "load font pls"){
-    seekIndexedDB().catch(()=>{
-      downloadFontFunc(event.data)
-    })
-  }
-  else console.error(event.data);
+  downloadFontFunc(event.data);
 });
-
 
 self.addEventListener('activate', function (e) {
   console.log('[ServiceWorker] Activate.');
@@ -154,12 +86,9 @@ self.addEventListener('activate', function (e) {
   return self.clients.claim(); //
 });
 
-
 self.addEventListener('fetch', function(e) {
   let hostname = e.request.url.split("//")[1].split('/')[0];
-  if(e.request.url.includes(indexedDBsuffix))
-      e.respondWith("ppp"); 
-  else e.respondWith(
+  e.respondWith(
     caches.match(e.request).then(async function(response) {
       if (response != null) {
         return response
