@@ -63,3 +63,19 @@ const fontDeployFunc = (name, url) => {
   }
 }
 }
+/*
+<!--script async type="module" id="font-script">
+if("serviceWorker" in navigator && navigator.serviceWorker.controller && "connection" in navigator && !navigator.connection.saveData)
+document.getElementById("font-script").outerHTML =  `<link rel="preload" id="font1" onload="document.getElementById('font-face').innerHTML += '@font-face {font-family: 筑紫A丸ゴシック;src: url(//cdn.jsdelivr.net/gh/edfus/storage/fonts/筑紫A丸ゴシック.woff2);font-weight: 400;style: normal;display: fallback}';document.getElementById('font1').remove();"
+  href="//cdn.jsdelivr.net/gh/edfus/storage/fonts/筑紫A丸ゴシック.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" id="font2" onload="document.getElementById('font-face').innerHTML += '@font-face {font-family: Consolas;src: url(//cdn.jsdelivr.net/gh/edfus/storage/fonts/Consolas.woff2);font-weight: 400;style: normal;display: fallback}';document.getElementById('font2').remove();"
+  href="//cdn.jsdelivr.net/gh/edfus/storage/fonts/Consolas.woff2" as="font" type="font/woff2" crossorigin="anonymous">`
+else document.getElementById("font-script").remove();</script-->
+<!--NOTE:当页面强制刷新 (Shift + refresh) 或不存在active worder时，该属性返回 null 。-->
+<style id="font-face"></style>
+<!--script async type="module" id="font-script">
+  if("serviceWorker" in navigator && navigator.serviceWorker.controller && "connection" in navigator && !navigator.connection.saveData){
+  document.getElementById("font-script").outerHTML =  `<link rel="preload" id="font1" onload="document.getElementById('font-face').innerHTML += '@font-face {font-family: 筑紫A丸ゴシック;src: local(筑紫A丸ゴシック),url(//cdn.jsdelivr.net/gh/edfus/storage/fonts/筑紫A丸ゴシック.woff2);font-weight: 400;style: normal;display: fallback}';document.getElementById('font1').remove();"
+    href="//cdn.jsdelivr.net/gh/edfus/storage/fonts/筑紫A丸ゴシック.woff2" as="font" type="font/woff2" crossorigin="anonymous">`;
+  }else document.getElementById("font-script").remove();</script--> 
+*/
