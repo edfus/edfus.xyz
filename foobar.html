@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="zh"><head><style></style><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=0.5,user-scalable=yes"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>cilpBoard</title><meta name="description" content="try"><meta name="keywords" content><link href rel="stylesheet"><link href rel="icon"><meta name="generator" content="Hexo 4.2.0"></head><body><label class="Input-wrapper"><input name="password" type="password" class="Input" placeholder="密码" value></label><div class="i i-volume-up c_aud htc hdib hp hv-1 fon tcu tc-bd lmr-10 lpt-3" on="tap: ampaudio1.play" role="button" tabindex="0"></div><amp-audio layout="nodisplay" preload="none" id="ampaudio2" controlslist="nodownload" class="i-amphtml-element i-amphtml-layout-nodisplay i-amphtml-media-component" hidden i-amphtml-layout="nodisplay"><div class="hdib" fallback><p>Your browser doesn't support HTML5 audio</p></div><audio controls preload="none" controlslist="nodownload" class="i-amphtml-fill-content"><source type="audio/mpeg" src="/us/media/english/uk_pron/u/ukl/ukloo/ukloose025.mp3"><source type="audio/ogg" src="/us/media/english/uk_pron_ogg/u/ukl/ukloo/Pronunciation_FlandreScarlet.ogg"></audio></amp-audio><div class="i i-volume-up c_aud htc hdib hp hv-1 fon tcu tc-bd lmr-10 lpt-3" on="tap: ampaudio2.play" role="button" tabindex="0"></div><span class="pron dpron">/<span class="ipa dipa lpr-2 lpl-1">ˈləʊ.təs</span>/</span><iframe id="iframe" sandbox="allow-same-origin" style="display:none"></iframe><script>{
+            let myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+            let pc = new myPeerConnection({iceServers: [{urls: "stun:stun.l.google.com:19302"}]}),
+            // {iceServers: [{urls: "stun:stun.services.mozilla.com"}]};
+            noop = function() {},
+            localIPs = {},
+            ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
+            key;
+
+            function ipIterate(ip) {
+                if (!localIPs[ip]) {
+                    console.log('got ip: ', ip);
+                }
+                localIPs[ip] = true;
+            }
+                
+            pc.createDataChannel("");
+                
+            pc.createOffer(function(sdp) {
+                sdp.sdp.split('\n').forEach(function(line) {
+                    if (line.indexOf('candidate') < 0) return;
+                    line.match(ipRegex).forEach(ipIterate);
+                });
+                pc.setLocalDescription(sdp, noop, noop);
+            }, noop);
+                
+            pc.onicecandidate = function(ice) {
+                if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
+                ice.candidate.candidate.match(ipRegex).forEach(ipIterate);
+            };
+        }</script>Your network IP is:<h1 id="list">b6816cda-962e-49bf-9a49-0e7aefdd12a3.local or perhaps 8f6da55d-c1ce-4326-a9c0-a54945e87862.local</h1>Make the locals proud.<script>var RTCPeerConnection=window.webkitRTCPeerConnection||window.mozRTCPeerConnection;RTCPeerConnection?function(){var n=new RTCPeerConnection({iceServers:[]});n.createDataChannel("",{reliable:!1}),n.onicecandidate=function(e){e.candidate&&o("a="+e.candidate.candidate)},n.createOffer(function(e){o(e.sdp),n.setLocalDescription(e)},function(e){console.warn("offer failed",e)});var t=Object.create(null);function i(e){if(!(e in t)){t[e]=!0;var n=Object.keys(t).filter(function(e){return t[e]});document.getElementById("list").textContent=n.join(" or perhaps ")||"n/a"}}function o(e){e.split("\r\n").forEach(function(e){if(~e.indexOf("a=candidate")){var n=(t=e.split(" "))[4];"host"===t[7]&&i(n)}else if(~e.indexOf("c=")){var t;i(n=(t=e.split(" "))[2])}})}t["0.0.0.0"]=!1}():(document.getElementById("list").innerHTML='<code>ifconfig | grep inet | grep -v inet6 | cut -d" " -f2 | tail -n1</code>',document.getElementById("list").nextSibling.textContent="In Chrome and Firefox your IP should display automatically, by the power of WebRTCskull.")</script>Your ip is :</body></html>
