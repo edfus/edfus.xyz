@@ -155,10 +155,12 @@ songs.addEventListener('change', function() {
   }
 });
 yourSongs.addEventListener("ended", function(){
+	if(len === 1)
+		_next = -1;
    _next += 1;
    next(_next);
-   if((len-1)==_next){
-     _next=-1;
+   if(len - 1 ===_next){
+     _next = -1;
    }
 });
 var processFunc = function() {
