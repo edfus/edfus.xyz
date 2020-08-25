@@ -15,6 +15,7 @@
   }
   window.addEventListener('beforeunload', ()=>{
     style.opacity = 1;
+    style.pointerEvents = 'auto';
     document.body.style.marginRight = window.innerWidth - document.documentElement.clientWidth + 'px';
     document.body.style.overflow = 'hidden';
   }, {passive: true, once: true})
