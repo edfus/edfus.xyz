@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous"><link rel="dns-prefetch" href="//cdn.jsdelivr.net"><link rel="preload" href="/combine.js" as="script" type="application/javascript"><meta name="viewport" content="width=device-width,initial-scale=1"><title>More | EDFUS&#39;s Blog</title><link rel="icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="//cdn.jsdelivr.net/gh/edfus/storage/favicons/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="//cdn.jsdelivr.net/gh/edfus/storage/favicons/favicon-16.png"><link rel="me" href="mailto:contact@edfus.xyz"><link rel="canonical" href="https://edfus.xyz/more/"><script async src="/combine.js"></script><link rel="preload" href="https://cdn.jsdelivr.net/gh/edfus/storage/images/more/YPME-1003.png.webp" as="image" type="image/webp" media="(min-width: 479px)"><link rel="apple-touch-icon" sizes="180x180" href="//cdn.jsdelivr.net/gh/edfus/storage/favicons/apple-touch-icon-180.png"><link rel="mask-icon" href="//cdn.jsdelivr.net/gh/edfus/storage/favicons/safari-pinned-tab.svg"><link rel="manifest" href="https://cdn.jsdelivr.net/gh/edfus/storage/favicons/manifest.webmanifest"><meta name="msapplication-config" content="https://cdn.jsdelivr.net/gh/edfus/storage/favicons/browserconfig.xml"><meta name="description" content="一些和亚文化有关的实验、探索、存档、分享性质的文章"><meta name="renderer" content="webkit"><meta name="theme-color" content="#fdfbf8"><meta name="format-detection" content="telephone=no, email=no"><meta name="subject" content="阅读"><link rel="stylesheet" href="/css/style-more.css"><meta name="generator" content="Hexo 4.2.0"></head><body><svg id="transition" onload="this.style.backgroundColor = '#fdfbf8';this.style.opacity = 0;this.style.pointerEvents = 'none';setTimeout(()=>{this.style.visibility = 'visible';},600)"></svg><script>{
+  const style = document.getElementById('transition').style;
+  if(performance.getEntriesByType('navigation')[0].type === 'reload'){
+    style.visibility = 'hidden';
+    document.body.removeAttribute('style'); 
+    // in case, for page loaded from cache (Though I didn't find it necessary)
+  }
+  else{
+    if(document.referrer && document.referrer.includes(location.host)  && !document.referrer.includes('/more/')){  
+      style.backgroundColor = '#222';   
+      style.transition = 'all .3s ease-in-out';
+    }
+    else style.backgroundColor = '#fdfbf8';
+  }
+  window.addEventListener('beforeunload', ()=>{
+    style.opacity = 1;
+    style.pointerEvents = 'auto';
+    document.body.style.marginRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+    document.body.style.overflow = 'hidden';
+  }, {passive: true, once: true});
+  // NOTE: 处理transition得把scrollbar的变换处理好，而scrollbar的宽度又是随着client、页面是否overflow而变化的
+  // 刚加载到这里时很可能还没有overflow，但之后却会overflow，因此没有用上面那个方法计算宽度
+  // syg onload 到底什么时候执行？chrome在新页面加载到什么的时候替换掉原页面？CSS和JS的加载顺序到底如何？
+  // 最终放弃掉了。
+}</script><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-title"><h1 id="logo-wrap"><span id="logo">MORE | 实验&阅读</span></h1></div><div id="header-inner"><nav id="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/more/intro.html">Intro</a><div class="more-dropdown-whole-control" id="dropdown1" onmouseenter="enter(this)" onmouseleave="leave(this)" onfocusin="enter(this)" onfocusout="leave(this)"><a class="main-nav-link" href="/more" id="e23">Items</a> <a class="dropdown-item" href="/categories/novel">novels</a> <a class="dropdown-item" href="/categories/yukkuri">ゆっくり</a> <a class="dropdown-item" href="/categories/explore">实验室</a> <a class="dropdown-item" href="/categories/gallery">gallery</a></div></nav><script>function enter(e){e.setAttribute("dropdown","drop");const t=e.getElementsByClassName("dropdown-item");for(let e=0;e<t.length;e++)setTimeout(()=>{t[e].classList.add("show")},100*e)}function leave(e){e.setAttribute("dropdown","up"),e.style.width="96px",setTimeout(()=>{const t=e.getElementsByClassName("dropdown-item");if("up"==e.getAttribute("dropdown"))for(let e=0;e<t.length;e++)setTimeout(()=>{t[e].classList.remove("show")},100*e)},200)}if(window.matchMedia("(max-width: 479px)").matches){document.getElementById("e23").setAttribute("href","javascript: void(0)");let e=document.createElement("A");e.innerText="More",e.classList.add("dropdown-item"),e.setAttribute("href","/more"),document.getElementById("dropdown1").insertBefore(e,document.getElementById("e23").nextSibling)}</script></div></div></header><main id="main" style="min-height:75%"><article class="article article-type-more-intro" itemtype="https://schema.org/Article" itemscope><div class="article-inner"><h2 class="article-heading" style="justify-content:start;margin-bottom:0"><a class="article-category" style="font-size:2rem" href="/more">#</a> <span itemprop="name" style="flex-grow:2;border-bottom:2px dashed #0080806f;padding:.25rem 0 .3rem">intro...</span></h2><ul class="article-meta-list"><li><span class="article-date"><time datetime="2020-08-25T16:00:00.000Z" itemprop="dateCreated">2020-08-26</time></span></li><li><span class="article-content" itemprop="abstract"><div class="overview-text"><p>这里是我的博客的more页，用作存档一些和亚文化有关的内容。</p><p>目前用来存放翻译过的馅文（餡小話）。</p><p>我不懂日语，只是个搬运工，感谢前辈们的翻译，来源标注在每个article的ul.article-meta-list后的HTML标签里（因为不大好呈现样式，所以做成不可见的了），若有需要，请<kbd>F12</kbd> -&gt; 切换到Elements tab，<kbd>ctrl</kbd> + <kbd>f</kbd>检索Source of this article。</p><p>另外，一些翻译可能不大通顺，或有繁简转换的问题，我的无脑复制粘贴也容易出排版/内容缺漏方面的错误。但因为我不时会重温这些馅文，所以（在重温时顺便将）大部分文章有修正/润色过，与原翻译有出入（可能较大）。</p><p>因懒，我在文章的选取上比较随机（看心情？），我也有好几个月没逛馒馒来吧了，许多新翻译的佳作没有被搬运过来。总之：这里都是好文，但并未囊括全部，有趣的馅文还有很多。</p><p>以前本想着把油库里相关的佳作漫画也搬运到这里来的，后因嫌麻烦，以及油库里漫画不那么容易走丢的缘故，于是作罢。对我来说，馅文才是油库里文化的灵魂。</p><p><img src="//cdn.jsdelivr.net/gh/edfus/storage/images/intro/2020-08-26_203330.png.webp" alt="2020-08-26_203330"><img src="//cdn.jsdelivr.net/gh/edfus/storage/images/intro/Screenshot_20200120-122035.png.webp" alt="Screenshot_20200120-122035"></p></div></span></li><a href="/more" class="more-content" itemprop="url">Back to Articles</a></ul></div></article></main><aside id="footer-show"><div id="footer-show-image"></div></aside><footer id="footer"><div id="footer-info">&copy; 2020 edfus<br>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a><br><span class="post-count">站点总字数：36.7万+</span><br>♪ <span id="footer-song-name"><span class="delay0" style="animation:none 3s linear infinite;animation-delay:0ms">向</span><span class="delay1" style="animation:none 3s linear infinite;animation-delay:.6s">こ</span><span class="delay2" style="animation:none 3s linear infinite;animation-delay:1.2s">う</span><span class="delay3" style="animation:none 3s linear infinite;animation-delay:1.8s">側</span><span class="delay4" style="animation:none 3s linear infinite;animation-delay:2.4s">の</span><span class="delay5" style="animation:none 3s linear infinite;animation-delay:3s">月</span></span></div></footer><script>.88<Math.random()?document.getElementById("footer-show-image").style.cssText='background-image: url("//cdn.jsdelivr.net/gh/edfus/storage/images/more/jacket3-ink.png.webp");top: -231.7px;':.44<Math.random()&&(document.getElementById("footer-show-image").style.cssText='background-image: url("//cdn.jsdelivr.net/gh/edfus/storage/images/more/今日も星空をつくる.png.webp");top: -263.7px;background-size: cover;')</script><a href="#" class="gotop" tabindex="-1"><img src="//cdn.jsdelivr.net/gh/edfus/storage/up.png.webp" alt="go to top"></a><script src="https://cdn.jsdelivr.net/gh/edfus/storage/js/script-more@1.2.js" async></script><script src="https://cdn.jsdelivr.net/gh/edfus/storage/glightbox/glightbox@1.2.min.js" async></script><script>window.addEventListener('load', () => {
+  document.head.innerHTML += `<link rel="stylesheet" href="/css/glightbox.css">`;
+  Array.from(document.querySelector('.article-type-more-intro').getElementsByTagName('img')).forEach(e => {
+      if (e.parentNode.classList.contains('glightbox')) return;
+      let glightboxCaption = '';
+
+      if(e.getAttribute('gallery-item-caption'))
+        glightboxCaption = `title: ${e.getAttribute('gallery-item-caption')}; `;
+      else if (e.alt)
+        glightboxCaption = `title: ${e.alt}; `;
+      
+      if(e.src) {
+        let glightboxSource = e.src;
+        if(glightboxSource.substring(glightboxSource.length - 5, glightboxSource.length) === '.webp' && glightboxSource.substring(glightboxSource.length - 10, glightboxSource.length - 5).indexOf('.') !== -1)
+          glightboxSource = glightboxSource.substring(0, glightboxSource.length - 5);
+        e.outerHTML = '<a href="' + glightboxSource + '" title="' + e.alt + '" class="glightbox" data-glightbox="' + glightboxCaption + '" rel="View hi-res version">' + e.outerHTML + '</a>';
+      }
+      else console.log(e + ':no Source Attribute');
+    });
+  GLightbox(null);
+ })</script></body></html>
