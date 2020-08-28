@@ -1,4 +1,16 @@
-<!DOCTYPE html><html style="height:100%"><head><title>贪吃蛇</title><style>.box{width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);cursor:pointer}.paused{color:#0ff}.died{color:#dc143c}.left{left:calc(20% - 128px)}.center{left:calc(50% - 128px)}.right{left:calc(80% - 128px)}</style><meta name="generator" content="Hexo 4.2.0"></head><body style="background:#222;height:100%;overflow:hidden"><div style="margin:20px auto;color:#fff;width:150px;text-align:center"><span id="hey">请选择速度</span><div>最高分: <span id="score">ᗜˬᗜ</span></div></div><div id="box0" hidden class="box" onclick="openF(0)"></div><div id="box1" hidden class="box" onclick="openF(1)"></div><div id="box2" hidden class="box" onclick="openF(2)"></div><script>var position = ['left', 'center', 'right'];
+<!DOCTYPE html><html style="height:100%"><head><title>贪吃蛇</title><style>.box{width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);cursor:pointer}.paused{color:#0ff}.died{color:#dc143c}.left{left:calc(20% - 128px)}.center{left:calc(50% - 128px)}.right{left:calc(80% - 128px)}.focus{outline:#59ebff solid 1px}</style><meta name="generator" content="Hexo 4.2.0"></head><body style="background:#222;height:100%;overflow:hidden"><div style="margin:20px auto;color:#fff;width:150px;text-align:center"><span id="hey">请选择速度</span><div>最高分: <span id="score">ᗜˬᗜ</span></div></div><snake-playground id="box0" onclick="openF(0)"></snake-playground><snake-playground id="box1" onclick="openF(1)"></snake-playground><snake-playground id="box2" onclick="openF(2)"></snake-playground><script>customElements.define('snake-playground', class extends HTMLElement {
+    constructor () {
+      super();
+      this.setAttribute('hidden','true');
+      this.setAttribute('class','box');
+      this.setAttribute("tabindex", "0");
+      this.onfocus = e => e.target.classList.add('focus');
+      this.onblur = e => e.target.classList.remove('focus');
+      this.onkeydown = e => {if(e.code ==="Enter") e.target.click()}
+    }
+});
+const position = ['left', 'center', 'right'];
+const delayMS = 600;
 const forwardF = N => {
     let arrN = [15], nextN = 10, food = -1;
     const callback = e=>{
@@ -13,7 +25,6 @@ const forwardF = N => {
             }
         }
         else paused = true;
-        // console.log(N, e.code)
     }
 
     let box = document.getElementById("box"+ N);
@@ -39,9 +50,9 @@ const forwardF = N => {
         let s = '';
         for(var j=0;j<200;j++)
             s += ( j % 10 === 0 && j != 0 ? '<br/>' : '')+( arrN.indexOf(j) >= 0 ?'\u25a0' : (j === food ? '\u2605' : '&emsp;'));
-        box.innerHTML=s;
+        box.innerHTML = s;
     }
-    document.addEventListener('keydown', callback);
+    document.addEventListener('keydown', callback, {passive: true});
     let run = setInterval(processCallback,100 * Math.pow(2, N));
 }
 const checkF = (endN, firstTime = false, mode = -1) => {
@@ -61,11 +72,17 @@ const checkF = (endN, firstTime = false, mode = -1) => {
     if(firstTime)
         if(mode < 0){
             everyF();
+            document.addEventListener('keyup', e => {
+                for(let i = 1; i <= 3; i++){
+                    if(['Numpad' + i, 'Digit' + i].includes(e.code))
+                        return openF(i - 1);
+                }
+            }, {passive: true})
         } else  (document.getElementById('hey').innerText = '按任意键暂停') && (single = true) && forwardF(mode % 3);
     else
         if(single)
-            setTimeout(() => forwardF(endN), 1000);
-        else setTimeout(everyF, 1000);
+            setTimeout(() => forwardF(endN), delayMS);
+        else setTimeout(everyF, delayMS);
     if(localStorage.snakeMaxScore)
         document.getElementById('score').innerText = localStorage.snakeMaxScore;
 }
