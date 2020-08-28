@@ -1,1 +1,82 @@
-<!DOCTYPE html><html style="height:100%"><head><title>贪吃蛇</title><meta name="generator" content="Hexo 4.2.0"></head><body style="background:#222;height:100%;overflow:hidden"><div style="margin:20px auto;color:#fff;width:150px;text-align:center">请选择速度</div><div id="box1" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(20% - 128px);cursor:pointer" onclick='location.href="/snake-100"'></div><script>var arr1=[15],next1=10;document.onkeydown=function(r){next1={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run1=setInterval(function(){var list=["-1&&arr1[0]%10==0","1&&arr1[0]%10==9","-10&&arr1[0]<10","10&&arr1[0]>189"],temp=arr1[0]+next1;if(list.some(function(x){return eval("next1=="+x)})||0<=arr1.indexOf(temp))return arr1=[15],next1=10,clearInterval(run1);arr1.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr1.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr1.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr1.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box1").innerHTML=s},100)</script><div id="box2" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(50% - 128px);cursor:pointer" onclick='location.href="/snake-200"'></div><script>var arr2=[15],next2=10;document.onkeydown=function(r){next2={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run2=setInterval(function(){var list=["-1&&arr2[0]%10==0","1&&arr2[0]%10==9","-10&&arr2[0]<10","10&&arr2[0]>189"],temp=arr2[0]+next2;if(list.some(function(x){return eval("next2=="+x)})||0<=arr2.indexOf(temp))return arr2=[15],next2=10,clearInterval(run2);arr2.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr2.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr2.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr2.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box2").innerHTML=s},200)</script><div id="box3" style="width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);left:calc(80% - 128px);cursor:pointer" onclick='location.href="/snake-400"'></div><script>var arr3=[15],next3=10;document.onkeydown=function(r){next3={37:-1,39:1,38:-10,40:10}[(r||event).keyCode]};var run3=setInterval(function(){var list=["-1&&arr3[0]%10==0","1&&arr3[0]%10==9","-10&&arr3[0]<10","10&&arr3[0]>189"],temp=arr3[0]+next3;if(list.some(function(x){return eval("next3=="+x)})||0<=arr3.indexOf(temp))return arr3=[15],next3=10,clearInterval(run3);arr3.unshift(temp),null==this.food||food==temp?(!function(r){0<=r&&arguments.callee((list[r]=r)-1)}(199),list=list.filter(function(r){return arr3.indexOf(r)<0}),food=list[Math.round(Math.random()*(list.length-1))]):arr3.pop();for(var s="",j=0;j<200;j++)s+=(j%10==0&&0!=j?"<br/>":"")+(0<=arr3.indexOf(j)?"■":j==food?"★":"&emsp;");document.getElementById("box3").innerHTML=s},400)</script></body></html>
+<!DOCTYPE html><html style="height:100%"><head><title>贪吃蛇</title><style>.box{width:256px;font:25px/25px 宋体;background:#000;color:#9f9;position:absolute;top:calc(50% - 250px);cursor:pointer}.paused{color:#0ff}.died{color:#dc143c}.left{left:calc(20% - 128px)}.center{left:calc(50% - 128px)}.right{left:calc(80% - 128px)}</style><meta name="generator" content="Hexo 4.2.0"></head><body style="background:#222;height:100%;overflow:hidden"><div style="margin:20px auto;color:#fff;width:150px;text-align:center"><span id="hey">请选择速度</span><div>最高分: <span id="score">ᗜˬᗜ</span></div></div><div id="box0" hidden class="box" onclick="openF(0)"></div><div id="box1" hidden class="box" onclick="openF(1)"></div><div id="box2" hidden class="box" onclick="openF(2)"></div><script>var position = ['left', 'center', 'right'];
+const forwardF = N => {
+    let arrN = [15], nextN = 10, food = -1;
+    const callback = e=>{
+        if([37, 39, 38, 40].includes(e.keyCode)){
+            nextN = {'37':-1,'39':1,'38':-10,'40':10}[e.keyCode]
+            if(paused){
+                setTimeout(() => {
+                    run = setInterval(processCallback, 100 * Math.pow(2, N));
+                    paused = false;
+                    box.classList.remove('paused');
+                }, N * 10);
+            }
+        }
+        else paused = true;
+        // console.log(N, e.code)
+    }
+
+    let box = document.getElementById("box"+ N);
+    if(single)
+        box.classList.add('center');
+    else box.classList.add(position[N]);
+    box.classList.remove('died');
+    box.removeAttribute('hidden');
+    const processCallback = ()=>{
+        if(paused) return clearInterval(run), box.classList.add('paused');
+        let temp = arrN[0] + nextN;
+        let list = ['-1&&arrN[0]%10==0','1&&arrN[0]%10==9','-10&&arrN[0]<10','10&&arrN[0]>189'];
+        if(list.some(function(x){return eval('nextN=='+x)})||arrN.indexOf(temp)>=0)
+            return clearInterval(run), document.removeEventListener('keydown', callback), box.classList.add('died'), (localStorage.snakeMaxScore ? (arrN.length > localStorage.snakeMaxScore ? localStorage.snakeMaxScore = arrN.length : null) : localStorage.snakeMaxScore = arrN.length), checkF(N);
+        arrN.unshift(temp);
+        if(food === -1 || food === temp){
+            (function(n){n>=0?arguments.callee((list[n]=n)-1):null})(199);
+            list = list.filter(x =>arrN.indexOf(x) < 0);
+            food = list[Math.round(Math.random()*(list.length-1))];
+        }
+        else
+            arrN.pop();
+        let s = '';
+        for(var j=0;j<200;j++)
+            s += ( j % 10 === 0 && j != 0 ? '<br/>' : '')+( arrN.indexOf(j) >= 0 ?'\u25a0' : (j === food ? '\u2605' : '&emsp;'));
+        box.innerHTML=s;
+    }
+    document.addEventListener('keydown', callback);
+    let run = setInterval(processCallback,100 * Math.pow(2, N));
+}
+const checkF = (endN, firstTime = false, mode = -1) => {
+    if(isNaN(mode)) {
+        alert(`${mode} is Not a Number!`, );
+        mode = -1;
+    };
+    
+    const everyF = ()=>{
+        end[endN] = true;
+        if(end.every(e => e)){
+            end = end.map(e => false);
+            for(let i = 0; i < 3; i++)
+                forwardF(i);
+        }
+    }
+    if(firstTime)
+        if(mode < 0){
+            everyF();
+        } else  (document.getElementById('hey').innerText = '按任意键暂停') && (single = true) && forwardF(mode % 3);
+    else
+        if(single)
+            setTimeout(() => forwardF(endN), 1000);
+        else setTimeout(everyF, 1000);
+    if(localStorage.snakeMaxScore)
+        document.getElementById('score').innerText = localStorage.snakeMaxScore;
+}
+var end = [true, true, false];
+var paused = false, single = false;
+if(!location.search)
+    checkF(2 , true);
+else checkF(2 , true, location.search.substring(1, location.search.length));
+
+const openF = N => {
+    if(single)
+        window.open(location.href.split('?')[0],'_self')
+    else window.open(location.href.split('?')[0] + '?' + N,'_self')
+}</script></body></html>
