@@ -8,15 +8,14 @@
     if(document.referrer && document.referrer.includes(location.host) && !document.referrer.includes('/more/')){  
       style.backgroundColor = '#222';   
       style.transition = 'all .3s ease-in-out';
-      // document.body.style.marginRight = window.innerWidth - document.documentElement.clientWidth + 'px';
-      document.body.style.overflow = 'hidden';
     }
     else style.backgroundColor = '#fdfbf8';
+    document.body.style.overflow = 'hidden';
   }
   window.addEventListener('beforeunload', ()=>{
     style.opacity = 1;
     style.pointerEvents = 'auto';
-    // document.body.style.marginRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+    document.body.style.marginRight = window.innerWidth - document.documentElement.clientWidth + 'px';
     document.body.style.overflow = 'hidden';
   }, {passive: true, once: true});
   // NOTE: 处理transition得把scrollbar的变换处理好，而scrollbar的宽度又是随着client、页面是否overflow而变化的
